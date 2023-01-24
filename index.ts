@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { z } from "zod";
 import { prisma } from "./utils/prisma";
+import { isAuthenticated, isAuthenticatedRequest } from "./utils/middleware";
 const app = express();
 
 app.use(cors());
@@ -19,12 +20,16 @@ const UserScheme = z.object({
     username: z.string().max(100),
     age: z.number().min(15),
     password: z.string().max(50).min(8),
-})
+});
 
 const loginScheme = z.object({
     email: z.string().email(),
-    password: z.string().min(8).max(50)
-})
+    password: z.string().min(8).max(50),
+});
+
+const addFavoriteSneakerScheme = z.object({
+    sneakerId: z.string(),
+});
 
 
 app.get("/", (req, res) => {
@@ -109,7 +114,38 @@ app.delete("/user/session", async (req, res) => {
     }
 })
 
+app.post("/user/favorite/sneaker", isAuthenticated, async (req: isAuthenticatedRequest, res) => {
+    const { sneakerId } = addFavoriteSneakerScheme.parse(req.body);
 
+    try{
+        const user= await prisma.user.update({
+            where: {
+                id: req.user?.id,
+            }, 
+            data: {
+                favoriteSneakers: {
+                    connect: {
+                        id: sneakerId
+                    },
+                },
+            },
+        });
+
+        return res.status(200).json({ message: "Sneaker added to list of favorites. ", user})
+    } catch (error){
+        return res.status(400).json({ message: "something went wrong..."});
+    }
+
+})
+
+app.post(
+    "/user/me",
+    isAuthenticated,
+    async (req: isAuthenticatedRequest, res) => {
+      return res.status(200).json({ user: req.user });
+    }
+  );
+  
 app.listen(4000, () => {
   console.log("listening on port 4000");
 });
