@@ -26,7 +26,7 @@ model Sneaker {
   sneakername String @unique
   retailprice Float 
   description String 
-  releasedAt DateTime 
+  releasedAt String
   addedAt DateTime @default(now())
 
   favoritedBy User[]
