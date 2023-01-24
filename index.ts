@@ -14,8 +14,15 @@ const sneakerScheme = z.object({
   releasedAt: z.string(),
 });
 
+const UserScheme = z.object({
+    email: z.string(),
+    username: z.string().max(100),
+    age: z.number().min(15),
+    password: z.string().max(50).min(8),
+})
+
 app.get("/", (req, res) => {
-  return res.status(200).json({ message: "Funfou nessa pomba" });
+  return res.status(200).json({ message: "Home page" });
 });
 
 app.post("/sneaker", async (req, res) => {
@@ -30,6 +37,24 @@ app.post("/sneaker", async (req, res) => {
     return res.status(400).json({ message: "Bad request error", error });
   }
 });
+
+app.get("/sneakers", async (req, res) => {
+    const allSneakers = await prisma.sneaker.findMany({})
+    return res.status(200).json({ sneakers: allSneakers })
+})
+
+app.post("/create-user", async (req, res) => {
+
+    try{
+
+        const newUser = UserScheme.parse(req.body);
+        const createdUser = await prisma.user.create({ data:newUser });
+        
+        return res.status(200).json({ user: createdUser})
+    } catch (error) {
+        return res.status(400).json({ message: "Bad request, couldn't create a user", error})
+    }
+})
 
 app.listen(4000, () => {
   console.log("listening on port 4000");

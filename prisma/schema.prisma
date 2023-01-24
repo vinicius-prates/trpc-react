@@ -15,8 +15,8 @@ model User {
   email String @unique
   username String @unique
   password String
+  age Int
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   favoriteSneakers Sneaker[]
 }
