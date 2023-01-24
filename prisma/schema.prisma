@@ -19,6 +19,7 @@ model User {
   createdAt DateTime @default(now())
 
   favoriteSneakers Sneaker[]
+  session Session[]
 }
 
 model Sneaker {
@@ -31,4 +32,11 @@ model Sneaker {
 
   favoritedBy User[]
 
+}
+
+model Session {
+  sessionId String @id @default(uuid())
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
 }

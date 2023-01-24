@@ -15,11 +15,17 @@ const sneakerScheme = z.object({
 });
 
 const UserScheme = z.object({
-    email: z.string(),
+    email: z.string().email(),
     username: z.string().max(100),
     age: z.number().min(15),
     password: z.string().max(50).min(8),
 })
+
+const loginScheme = z.object({
+    email: z.string().email(),
+    password: z.string().min(8).max(50)
+})
+
 
 app.get("/", (req, res) => {
   return res.status(200).json({ message: "Home page" });
@@ -55,6 +61,54 @@ app.post("/create-user", async (req, res) => {
         return res.status(400).json({ message: "Bad request, couldn't create a user", error})
     }
 })
+
+app.post("/user/session", async (req, res) => {
+    
+    const { email, password } = loginScheme.parse(req.body);
+    const user = await prisma.user.findFirst({
+        where:{
+            email,
+        }
+    });
+
+    if(!user) return res.status(404).json({ message: "Error 404, user not found."});
+
+    const correctPassword = password === user.password;
+
+    if(!correctPassword) return res.status(401).json({ message: "Invalid password"});
+
+    const newSession = await prisma.session.create( {
+        data:{
+                userId: user.id
+        }
+    });
+
+    const newSessionId = newSession.sessionId;
+
+    return res.status(200).json({ message: "You now is logged in.", newSessionId})
+
+    
+} )
+
+app.delete("/user/session", async (req, res) => {
+    
+    const { sessionId } = z.object({
+        sessionId: z.string(),
+    }).parse(req.body);
+
+    try{
+        await prisma.session.delete({
+            where: {
+                sessionId,
+            },
+        });
+
+        return res.status(200).json({ message: "You logged out!"})
+    } catch (error){
+        return res.status(500).json({ message: "ah, shit! something went wrong."})
+    }
+})
+
 
 app.listen(4000, () => {
   console.log("listening on port 4000");
