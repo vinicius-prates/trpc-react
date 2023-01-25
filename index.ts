@@ -44,9 +44,30 @@ const appRouter = t.router({
                 releasedAt: input.releasedAt
             }
         })
+    }),
 
-        
-        
+    deleteSneaker: t.procedure.input(z.object({
+        id: z.string()
+    }))
+    .mutation(async ({ ctx, input}) => {
+        const { id } = input;
+        try {
+             await prisma.sneaker.delete({
+                where: {
+                    id,
+                }
+            })
+            
+        } catch (error) {
+
+            throw new TRPCError({
+                code: "FORBIDDEN",
+                cause: error,
+                message:"Could not delete this sneaker"
+            })
+            
+        }
+
     })
 })
 
