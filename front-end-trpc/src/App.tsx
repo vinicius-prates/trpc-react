@@ -14,7 +14,6 @@ function App() {
     api.allSneaker.query()
   );
 
-
   const { mutate } = useMutation(["newSneaker"], api.addSneaker.mutate, {
     onError: (err) => {
       console.error(err);
@@ -40,7 +39,19 @@ function App() {
 
   return (
     <div>
-      <p>{JSON.stringify(data.allSneakers)}</p>
+        <div>
+        <h1> All Sneakers </h1>
+            <div>
+                {data.allSneakers.map(sneaker => (
+                  <div>
+                    <h3>{sneaker.sneakername} - R$ {sneaker.retailprice}</h3>
+                    <p>{sneaker.description}</p>
+                    <p>Release year:  {sneaker.releasedAt}</p>
+                    </div>
+                ))}
+            </div>
+
+        </div>
       <div className="add-sneaker">
         <h1>Sneakers</h1>
         <form
