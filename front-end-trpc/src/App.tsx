@@ -11,7 +11,18 @@ function App() {
   const [ description, setDescription] = useState("");
   const [ releaseDate, setReleaseDate] = useState("");
   const { data, isLoading, isError } = useQuery(['getSneakers'], () => api.allSneaker.query())
-  const { mutate } = useMutation(['newSneaker'], api.addSneaker.mutate)
+  const { mutate } = useMutation(['newSneaker'], api.addSneaker.mutate, {
+    onError: (err) => {
+      console.error(err)
+      alert("Sneaker nao adicionado")
+    },
+
+    onSuccess: () => {
+      alert(`Sneaker ${sneakername}, adicionado!`)
+    }
+
+    
+  })
 
   if(isLoading){
     return <div>Loading...</div>
@@ -32,7 +43,7 @@ function App() {
                 description: description,
                 releasedAt: releaseDate
                 })
-              
+          
       }}>
         <input type="string" name="sneakername" placeholder="Ex: Nmd R1" onChange={(evt) => setSneakerName(evt.target.value)}></input>
         <input type="number" name="retailprice" placeholder="R$ 499,90" onChange={(evt) => setRetailPrice(evt.target.valueAsNumber)}></input>
