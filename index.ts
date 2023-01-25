@@ -34,7 +34,18 @@ const appRouter = t.router({
     }),
 
     addSneaker: t.procedure.input(sneakerScheme)
-    .mutation( async () => {
+    .mutation( async ({ input }) => {
+
+        await prisma.sneaker.create({
+            data: {
+                sneakername: input.sneakername,
+                description: input.description,
+                retailprice: input.retailprice,
+                releasedAt: input.releasedAt
+            }
+        })
+
+        
         
     })
 })
