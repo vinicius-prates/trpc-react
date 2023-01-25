@@ -8,33 +8,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const sneakerScheme = z.object({
-  sneakername: z.string().max(50),
-  retailprice: z.number(),
-  description: z.string().max(500),
-  releasedAt: z.string(),
-});
-
-const UserScheme = z.object({
-    email: z.string().email(),
-    username: z.string().max(100),
-    age: z.number().min(15),
-    password: z.string().max(50).min(8),
-});
-
-const loginScheme = z.object({
-    email: z.string().email(),
-    password: z.string().min(8).max(50),
-});
-
-const addFavoriteSneakerScheme = z.object({
-    sneakerId: z.string(),
-});
-
-
 app.get("/", (req, res) => {
   return res.status(200).json({ message: "Home page" });
 });
+
+const sneakerScheme = z.object({
+    sneakername: z.string().max(50),
+    retailprice: z.number(),
+    description: z.string().max(500),
+    releasedAt: z.string(),
+  });
+  
 
 app.post("/sneaker", async (req, res) => {
   try {
@@ -54,6 +38,13 @@ app.get("/sneakers", async (req, res) => {
     return res.status(200).json({ sneakers: allSneakers })
 })
 
+const UserScheme = z.object({
+    email: z.string().email(),
+    username: z.string().max(100),
+    age: z.number().min(15),
+    password: z.string().max(50).min(8),
+})
+
 app.post("/create-user", async (req, res) => {
 
     try{
@@ -66,6 +57,13 @@ app.post("/create-user", async (req, res) => {
         return res.status(400).json({ message: "Bad request, couldn't create a user", error})
     }
 })
+
+
+const loginScheme = z.object({
+    email: z.string().email(),
+    password: z.string().min(8).max(50),
+});
+
 
 app.post("/user/session", async (req, res) => {
     
@@ -113,6 +111,11 @@ app.delete("/user/session", async (req, res) => {
         return res.status(500).json({ message: "ah, shit! something went wrong."})
     }
 })
+
+const addFavoriteSneakerScheme = z.object({
+    sneakerId: z.string(),
+});
+
 
 app.post("/user/favorite/sneaker", isAuthenticated, async (req: isAuthenticatedRequest, res) => {
     const { sneakerId } = addFavoriteSneakerScheme.parse(req.body);
