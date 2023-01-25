@@ -23,11 +23,11 @@ const sneakerScheme = z.object({
 app.post("/sneaker", async (req, res) => {
   try {
     const newSneaker = sneakerScheme.parse(req.body);
-    const sneakers = await prisma.sneaker.create({
+    const sneaker = await prisma.sneaker.create({
       data: newSneaker,
     });
 
-    return res.status(200).json({ sneakers });
+    return res.status(200).json({message:"Sneaker added", sneaker });
   } catch (error) {
     return res.status(400).json({ message: "Bad request error", error });
   }
