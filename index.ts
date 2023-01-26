@@ -5,7 +5,7 @@ import { prisma } from "./utils/prisma";
 import superjson from "superjson"
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { initTRPC, TRPCError } from "@trpc/server";
-import { sneakerScheme } from "./zod-schemes";
+import { sneakerScheme, UserScheme } from "./zod-schemes";
 
 export const app = express();
 
@@ -68,6 +68,28 @@ const appRouter = t.router({
             
         }
 
+    }),
+
+    createUser: t.procedure.input(UserScheme)
+    .mutation(async ({ input }) => {
+        try {
+            const newUser = await prisma.user.create({
+                data: {
+                    username: input.username,
+                    email: input.email,
+                    age: input.age,
+                    password: input.password,
+                }
+            })
+        return { newUser }            
+        } catch (error) {
+            throw new TRPCError({
+                code: "FORBIDDEN",
+                cause: error,
+                message:"Could not delete this sneaker"
+            })
+        }
+        
     })
 })
 
