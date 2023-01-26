@@ -22,3 +22,4 @@ export const loginScheme = z.object({
 export const addFavoriteSneakerScheme = z.object({
     sneakerId: z.string(),
 });
+

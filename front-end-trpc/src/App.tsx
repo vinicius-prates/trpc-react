@@ -4,11 +4,13 @@ import "./App.css";
 import { api } from "./util/trpc";
 
 function App() {
-  
+
+  const [sneakerId, setSneakerId] = useState("");
   const { data, isLoading, isError } = useQuery(["getSneakers"], () =>
     api.allSneaker.query()
   );
 
+  
   
   if (isLoading) {
     return <div>Loading...</div>;
