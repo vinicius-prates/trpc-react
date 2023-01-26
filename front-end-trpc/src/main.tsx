@@ -12,7 +12,6 @@ const router = createBrowserRouter([
   {
     path:"/",
     element:<App/>,
-    
   },
   {
     path:"/add-sneaker",
