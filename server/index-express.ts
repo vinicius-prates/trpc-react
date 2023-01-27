@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { prisma } from "./utils/prisma";
-import { isAuthenticated, isAuthenticatedRequest } from "./utils/middleware";
-import { app } from "./index"
+import { prisma } from "../utils/prisma";
+import { isAuthenticated, isAuthenticatedRequest } from "../utils/middleware";
+import { app } from "../index"
 import { addFavoriteSneakerScheme, loginScheme, sneakerScheme, UserScheme } from "./zod-schemes";
 
 app.get("/", (req, res) => {

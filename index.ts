@@ -5,7 +5,7 @@ import { prisma } from "./utils/prisma";
 import superjson from "superjson";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { initTRPC, TRPCError } from "@trpc/server";
-import { loginScheme, sneakerScheme, UserScheme } from "./zod-schemes";
+import { loginScheme, sneakerScheme, UserScheme } from "./server/zod-schemes";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { createContext, publicProcedure } from "./utils/trpc";
 import cookieParser from 'cookie-parser'
