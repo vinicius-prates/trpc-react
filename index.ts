@@ -7,11 +7,18 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { loginScheme, sneakerScheme, UserScheme } from "./zod-schemes";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { publicProcedure } from "./utils/trpc";
-
+import { createContext, publicProcedure } from "./utils/trpc";
+import cookieParser from 'cookie-parser'
 export const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+      "http://localhost:5173",
+      "http://127.0.0.1:5173"
+  ],
+  credentials: true
+}));
+app.use(cookieParser())
 app.use(express.json());
 
 const t = initTRPC.create({
@@ -98,7 +105,7 @@ const appRouter = t.router({
       })
 
     }
-    const user = await prisma.user.findFirst({
+    const user = await ctx.prisma.user.findFirst({
       where: {
         email: input.email,
       },
@@ -126,6 +133,7 @@ const appRouter = t.router({
     const newSessionId = login.sessionId;
   
     ctx.setSessionCookie(newSessionId)
+    return (user)
     
   })
   
@@ -136,6 +144,7 @@ app.use(
   "/trpc",
   trpcExpress.createExpressMiddleware({
     router: appRouter,
+    createContext,
   })
 );
 

@@ -4,7 +4,8 @@ import App from './App'
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { AddSneaker } from './pages/AddSneaker'
-import { NewUser } from './pages/newUSer'
+import { NewUser } from './pages/NewUser'
+import { LogIn } from './pages/LogIn'
  
 const queryClient = new QueryClient()
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path:"/register",
     element: <NewUser/>
+  },
+  {
+    path:"/login",
+    element:<LogIn/>
   }
 ])
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

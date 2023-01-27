@@ -37,7 +37,7 @@ export const NewUser = () => {
                 <input type="password"  className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg" placeholder="*******" onChange={(e) => setPassword(e.target.value)}/>
                 <input type="number"  className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg" placeholder="your age" onChange={(e) => setAge(e.target.valueAsNumber)}/>
                 <button className="bg-blue-500 py-3 rounded-xl text-white font-bold  lg:self-center  hover:bg-[#323232] duration-300 w-40">Register</button>
-
+                
 
             </form>
         </div>
