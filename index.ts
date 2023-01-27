@@ -6,6 +6,8 @@ import superjson from "superjson";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { loginScheme, sneakerScheme, UserScheme } from "./zod-schemes";
+import { createExpressMiddleware } from "@trpc/server/adapters/express";
+import { publicProcedure } from "./utils/trpc";
 
 export const app = express();
 
@@ -87,7 +89,15 @@ const appRouter = t.router({
     }
   }),
 
-  login: t.procedure.input(loginScheme).mutation(async ({ input }) => {
+  login: publicProcedure.input(loginScheme).mutation(async ({ ctx, input  }) => {
+    if(ctx.session && ctx.session.user){
+      console.log("session on login", ctx.session)
+      throw new TRPCError({
+        code:"UNAUTHORIZED",
+        message: "You are already logged in."
+      })
+
+    }
     const user = await prisma.user.findFirst({
       where: {
         email: input.email,
@@ -113,11 +123,12 @@ const appRouter = t.router({
         userId: user.id,
       },
     });
-
     const newSessionId = login.sessionId;
+  
+    ctx.setSessionCookie(newSessionId)
     
-    
-  }),
+  })
+  
 });
 
 export type AppRouter = typeof appRouter;
