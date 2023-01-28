@@ -44,59 +44,35 @@ export const AddSneaker = () => {
               name="sneakername"
               placeholder="Ex: Nmd R1"
               onChange={(evt) => setSneakerName(evt.target.value)}
-              className="border-b-2 border-slate-600 bg-gray-100 focus:outline-none px-2 py-1 text-slate-600  rounded-t-md"
+              className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
             ></input>
             <input
               type="number"
               name="retailprice"
               placeholder="R$ 499,90"
               onChange={(evt) => setRetailPrice(evt.target.valueAsNumber)}
-              className="border-b-2 border-slate-600 bg-gray-100 focus:outline-none px-2 py-1 text-slate-600  rounded-t-md"
+              className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
             ></input>
             <input
               type="string"
               name="description"
               placeholder="Descripiton"
               onChange={(evt) => setDescription(evt.target.value)}
-              className="border-b-2 border-slate-600 bg-gray-100 focus:outline-none px-2 py-1 text-slate-600  rounded-t-md"
+              className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
             ></input>
             <input
               type="string"
               name="releasedAt"
               placeholder="Release date"
               onChange={(evt) => setReleaseDate(evt.target.value)}
-              className="border-b-2 border-slate-600 bg-gray-100 focus:outline-none px-2 py-1 text-slate-600 rounded-t-md"
+              className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
             ></input>
             <button className="bg-blue-600 py-4 rounded-xl text-white font-bold  lg:self-center  hover:bg-[#323232] duration-300 w-40">
               Add
             </button>
           </form>
 
-          <div className=" flex flex-col gap-4">
-            <h1> Delete Sneaker</h1>
-            <form
-              onSubmit={(evt) => {
-                evt.preventDefault();
-
-                deleteSneakerFunc();
-              }}
-              className="flex flex-col gap-28"
-            >
-              <input
-                type="string"
-                name="id"
-                placeholder="sneakerId"
-                className="border-b-2 border-slate-600 bg-gray-100 focus:outline-none px-2 py-1 text-slate-600 w-96  rounded-t-md"
-                onChange={(evt) => {
-                  setSneakerId(evt.target.value);
-                  console.log(sneakerId);
-                }}
-              ></input>
-              <button className="bg-blue-600 py-4 rounded-xl text-white font-bold  lg:self-center  hover:bg-[#323232] duration-300 w-40">
-                Delete
-              </button>
-            </form>
-          </div>
+          
         </div>
       </div>
     </div>
