@@ -8,9 +8,9 @@ export const LogIn = () => {
 
   const { mutate } = useMutation(["login"], api.login.mutate);
   return (
-    <div>
-      <div className="w-screen h-screen flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold "> Login  </h1>
+    <div className="bg-[#202020] h-screen w-screen justify-center items-center flex flex-col">
+      <div className=" bg-[#3b3842] shadow-lg shadow-neutral-800/200 gap-4 flex flex-col  px-32 py-24 rounded-lg">
+        <h1 className="text-2xl font-bold text-[#ffdb4b] "> Login  </h1>
 
         <form
           className="flex flex-col gap-4 "
@@ -24,17 +24,17 @@ export const LogIn = () => {
         >
           <input
             type="string"
-            className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
+            className="text-md bg-[#3b3842] text-[#ffdb4b] opacity-70 font-semibold border-b-[1.5px] italic border-[#ffdb4b] p-1 focus:outline-none"
             placeholder="example@gmail.com"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
-            className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
+            className="text-md bg-[#3b3842] text-[#ffdb4b] opacity-70 font-semibold border-b-[1.5px] italic border-[#ffdb4b] p-1 focus:outline-none"
             placeholder="*******"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="bg-blue-500 py-3 rounded-xl text-white font-bold  lg:self-center  hover:bg-[#323232] duration-300 w-40">
+          <button className="bg-[#ffdb4b] px-16 py-2 rounded-md text-[#404040] font-bold  lg:self-center  hover:bg-[#323232] hover:text-[#ffdb4b] duration-300">
             Login
           </button>
         </form>
