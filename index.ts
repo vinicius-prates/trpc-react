@@ -7,7 +7,7 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { loginScheme, sneakerScheme, UserScheme } from "./server/zod-schemes";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { createContext, publicProcedure } from "./utils/trpc";
+import { createContext, privateProcedure, publicProcedure } from "./utils/trpc";
 import cookieParser from 'cookie-parser'
 export const app = express();
 
@@ -135,7 +135,20 @@ const appRouter = t.router({
     ctx.setSessionCookie(newSessionId)
     return (user)
     
+  }),
+
+  logout: privateProcedure.mutation(async ({ctx}) => {
+    const session = await ctx.prisma.session.delete({
+      where: {
+        sessionId: ctx.session?.sessionId
+      },
+
+    });
+    ctx.deleteSessionCookie()
+    return { message: "Logout done"}
   })
+
+
   
 });
 
