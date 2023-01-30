@@ -19,8 +19,8 @@ export const NewUser = () => {
     })
     return(
 
-        <div className="w-screen h-screen flex flex-col items-center justify-center gap-4">
-            <h1 className="text-2xl font-bold "> New User </h1>
+        <div className="w-screen h-screen flex flex-col items-center justify-center gap-4 bg-[#202020]">
+            <h1 className="text-2xl font-bold text-[whitesmoke]"> New User </h1>
 
             <form className="flex flex-col gap-4 " onSubmit={(e) => {
                 e.preventDefault();
@@ -36,7 +36,7 @@ export const NewUser = () => {
                 <input type="string"  className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg" placeholder="example@gmail.com" onChange={(e)=> setEmail(e.target.value)}/>
                 <input type="password"  className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg" placeholder="*******" onChange={(e) => setPassword(e.target.value)}/>
                 <input type="number"  className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg" placeholder="your age" onChange={(e) => setAge(e.target.valueAsNumber)}/>
-                <button className="bg-blue-500 py-3 rounded-xl text-white font-bold  lg:self-center  hover:bg-[#323232] duration-300 w-40">Register</button>
+                <button className="bg-[#F9D030] py-3 rounded-xl text-white font-bold  lg:self-center  hover:bg-[#323232] duration-300 w-40">Register</button>
                 
 
             </form>

@@ -23,10 +23,10 @@ export const AddSneaker = () => {
     api.deleteSneaker.mutate({ id: sneakerId });
   };
   return (
-    <div className="flex flex-col justify-center items-center gap-10">
-      <h1 className="text-2xl font-bold">Add new Sneaker</h1>
-      <div className=" items-center">
-        <div className="flex  flex-row justify-center items-center gap-20">
+    <div className="flex flex-col justify-center items-center gap-10 bg-[#202020] h-screen">
+      <div className=" items-center bg-[#3b3842] shadow-lg shadow-neutral-800/200   px-32 py-24 rounded-lg">
+        <h1 className="text-2xl font-bold text-[#ffdb4b] ">Add new Sneaker</h1>
+        <div className="flex  flex-row justify-center items-center my-4 gap-20">
           <form
             onSubmit={(evt) => {
               evt.preventDefault();
@@ -37,42 +37,46 @@ export const AddSneaker = () => {
                 releasedAt: releaseDate,
               });
             }}
-            className="flex flex-col items-center w- gap-3"
+            className="flex flex-col  items-center gap-20"
           >
-            <input
-              type="string"
-              name="sneakername"
-              placeholder="Ex: Nmd R1"
-              onChange={(evt) => setSneakerName(evt.target.value)}
-              className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
-            ></input>
-            <input
-              type="number"
-              name="retailprice"
-              placeholder="R$ 499,90"
-              onChange={(evt) => setRetailPrice(evt.target.valueAsNumber)}
-              className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
-            ></input>
-            <input
-              type="string"
-              name="description"
-              placeholder="Descripiton"
-              onChange={(evt) => setDescription(evt.target.value)}
-              className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
-            ></input>
-            <input
-              type="string"
-              name="releasedAt"
-              placeholder="Release date"
-              onChange={(evt) => setReleaseDate(evt.target.value)}
-              className="text-md bg-gray-100 text-gray-700 p-2 focus:outline-none rounded-lg"
-            ></input>
-            <button className="bg-blue-600 py-4 rounded-xl text-white font-bold  lg:self-center  hover:bg-[#323232] duration-300 w-40">
-              Add
-            </button>
-          </form>
+            <div className="flex flex-row gap-6 ">
+              <div className="flex flex-col gap-10">
+                <input
+                  type="string"
+                  name="sneakername"
+                  placeholder="Ex: Nmd R1"
+                  onChange={(evt) => setSneakerName(evt.target.value)}
+                  className="text-md bg-[#3b3842] text-[#ffdb4b] opacity-70 font-semibold border-b-[1.5px] italic border-[#ffdb4b] p-1 focus:outline-none"
+                ></input>
+                <input
+                  type="number"
+                  name="retailprice"
+                  placeholder="R$ 499,90"
+                  onChange={(evt) => setRetailPrice(evt.target.valueAsNumber)}
+                  className="text-md bg-[#3b3842] text-[#ffdb4b] opacity-70 font-semibold border-b-[1.5px] italic border-[#ffdb4b]  p-1 focus:outline-none"
+                ></input>
+                 <input
+                  type="string"
+                  name="releasedAt"
+                  placeholder="Release date"
+                  onChange={(evt) => setReleaseDate(evt.target.value)}
+                  className="text-md bg-[#3b3842] text-[#ffdb4b] opacity-70 font-semibold border-b-[1.5px] italic border-[#ffdb4b] p-1 focus:outline-none"
+                ></input>
+              </div>
+              <div className="flex flex-col gap-10">
+               
+                <textarea
+                  name="description"
+                  placeholder="Descripiton"
+                  onChange={(evt) => setDescription(evt.target.value)}
+                  className="text-md bg-[#3b3842] text-[#ffdb4b] opacity-70 resize-none h-[11.2rem] italic font-semibold border-b-[1.5px] border-[#ffdb4b] p-1 focus:outline-none"
+                ></textarea>
+              </div>
 
-          
+            </div>
+              <button className="bg-[#ffdb4b] px-16 py-2 rounded-md text-[#404040] font-bold  lg:self-center  hover:bg-[#323232] hover:text-[#ffdb4b] duration-300 ">
+                Add</button>
+          </form>
         </div>
       </div>
     </div>
