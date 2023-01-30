@@ -11,9 +11,13 @@ export const createContext = async ({
         res.cookie('sessionId', sessionId, { httpOnly: true})
     }
 
+    const deleteSessionCookie = ( ) => {
+        res.clearCookie('sessionId')
+    }
+
     const sessionId = req.cookies.sessionId;
     if (!sessionId) {
-        return { prisma, setSessionCookie};
+        return { prisma, setSessionCookie, deleteSessionCookie};
     }
 
     const session = await prisma.session.findFirst({
@@ -23,7 +27,7 @@ export const createContext = async ({
         }
     })
 
-    return { prisma, session, setSessionCookie};
+    return { prisma, session, setSessionCookie, deleteSessionCookie};
 }
 
 type Context = inferAsyncReturnType<typeof createContext>;
