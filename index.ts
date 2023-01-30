@@ -144,11 +144,9 @@ const appRouter = t.router({
       },
 
     });
-    ctx.deleteSessionCookie()
+    ctx.deleteSessionCookie(session.sessionId)
     return { message: "Logout done"}
   })
-
-
   
 });
 
