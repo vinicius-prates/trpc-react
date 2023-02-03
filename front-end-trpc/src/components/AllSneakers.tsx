@@ -1,5 +1,4 @@
 import { useMutation, useQuery,useQueryClient } from "@tanstack/react-query";
-import cookieParser, { signedCookie } from "cookie-parser";
 import "../App.css";
 import { api } from "../util/trpc";
 
