@@ -12,10 +12,12 @@ export const createContext = async ({
     }
 
     const deleteSessionCookie = (sessionId: string ) => {
-        res.clearCookie('sessionId')
+        res.clearCookie('sessionId');
     }
 
+    
     const sessionId = req.cookies.sessionId;
+
     if (!sessionId) {
         return { prisma, setSessionCookie, deleteSessionCookie};
     }

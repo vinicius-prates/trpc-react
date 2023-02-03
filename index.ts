@@ -146,7 +146,14 @@ const appRouter = t.router({
     });
     ctx.deleteSessionCookie(session.sessionId)
     return { message: "Logout done"}
-  })
+  }),
+
+  me: privateProcedure.query(async ({ctx}) => {
+    console.log(ctx.session?.sessionId)
+    return {
+      user:ctx.user
+    }
+  }),
   
 });
 

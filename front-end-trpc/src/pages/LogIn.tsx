@@ -19,7 +19,10 @@ export const LogIn = () => {
             mutate({
               email: email,
               password: password,
-            });
+            },
+            );
+
+            
           }}
         >
           <input
