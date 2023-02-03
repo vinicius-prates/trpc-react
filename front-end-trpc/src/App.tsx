@@ -8,16 +8,12 @@ function App() {
   const navi = useNavigate();
 
   const meQuery = useQuery(["me"], () => api.me.query());
-   
-  useEffect(() => {
-    if (!meQuery.data?.user) {
-      navi("/login")
-    }
-  }, [])
+  const user = meQuery.data?.user;
 
+ 
   return (
-    <div className="flex flex-col h-screen bg-[#fafafa]">
-      {JSON.stringify(meQuery.data)}
+    <div className="flex flex-col h-screen bg-[#202020]">
+      {user ?  <div>cala a boca</div> : <div>sexo</div>}
       <div className="flex flex-col items-center text-center m-10">
         <h1 className="text-2xl font-bold text-white"> All Sneakers </h1>
         <AllSneakers />
