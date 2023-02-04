@@ -6,7 +6,7 @@ import { api } from "./util/trpc";
 function App() {
   const navi = useNavigate();
 
-  const meQuery = useQuery(["me"], () => api.me.query());
+  const meQuery = useQuery(["me"], () => api.user.me.query());
   const user = meQuery.data?.user;
 
  

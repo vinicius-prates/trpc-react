@@ -6,7 +6,7 @@ export const NewUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [age, setAge] = useState(15);
-  const { mutate } = useMutation(["createUser"], api.createUser.mutate, {
+  const { mutate } = useMutation(["createUser"], api.user.createUser.mutate, {
     onError: (err) => {
       console.log(err);
       alert("Couldn't register your user.");

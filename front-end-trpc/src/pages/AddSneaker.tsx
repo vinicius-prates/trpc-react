@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import {  useState } from "react";
 import { api } from "../util/trpc";
 
 export const AddSneaker = () => {
@@ -9,7 +9,7 @@ export const AddSneaker = () => {
   const [releaseDate, setReleaseDate] = useState("");
 
   const [sneakerId, setSneakerId] = useState("");
-  const { mutate } = useMutation(["newSneaker"], api.addSneaker.mutate, {
+  const { mutate } = useMutation(["newSneaker"], api.sneaker.addSneaker.mutate, {
     onError: (err) => {
       console.error(err);
       alert("Sneaker nao adicionado");
@@ -20,7 +20,7 @@ export const AddSneaker = () => {
     },
   });
   const deleteSneakerFunc = () => {
-    api.deleteSneaker.mutate({ id: sneakerId });
+    api.sneaker.deleteSneaker.mutate({ id: sneakerId });
   };
   return (
     <div className="flex flex-col justify-center items-center gap-10 bg-[#202020] h-screen">

@@ -5,11 +5,11 @@ import { api } from "../util/trpc";
 export const AllSneakers = () => {
     const queryClient = useQueryClient()
   const { data, isLoading, isError, refetch } = useQuery(["getSneakers"], () =>
-    api.allSneaker.query()
+    api.sneaker.allSneaker.query()
   );
   const deleteSneakerQuery = useMutation(
     ["deleteSneaker"],
-    api.deleteSneaker.mutate,
+    api.sneaker.deleteSneaker.mutate,
     { onSuccess: () => queryClient.invalidateQueries(['getSneakers']) }
   );
   if (isLoading) {

@@ -6,7 +6,7 @@ export const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate } = useMutation(["login"], api.login.mutate);
+  const { mutate } = useMutation(["login"], api.user.login.mutate);
   return (
     <div className="bg-[#202020] h-screen w-screen justify-center items-center flex flex-col">
       <div className=" bg-[#3b3842] shadow-lg shadow-neutral-800/200 gap-4 flex flex-col  px-32 py-24 rounded-lg">
